@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import List from "./List"
 import Map from './Map';
 import axios from 'axios';
-import ItemList from './OutputList';
-import Reminder from './Reminder';
-import { GOOGLE_CLIENT_SECRET } from './secrets';
+import GenerateKit from './Generate';
 
 const App = () => {
     const [data, setData] = useState({"message": '', "name": ''});
@@ -57,17 +55,7 @@ const App = () => {
             >
                 Emergency Essentials Hub
             </h1>
-            <h2 style={{
-                textAlign: 'center',
-                color: '#333',
-                fontFamily: 'Montserrat, sans-serif',
-                fontWeight: '600',
-                marginBottom: '28px'
-            }}>
-                Emergency Kit:
-            </h2>
-            <ItemList items={LLMoutput} />
-            <Reminder items={LLMoutput} />
+            <GenerateKit />
             <Map />
             <List />
         </div>
