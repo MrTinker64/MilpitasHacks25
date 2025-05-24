@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import './index.css';
 import App from './App';
-import List from './List'
 import reportWebVitals from './reportWebVitals';
+import { GOOGLE_CLIENT_ID } from './secrets';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-<React.StrictMode>
-  <App />
-</React.StrictMode>
+  <React.StrictMode>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID} scope={"https://www.googleapis.com/auth/calendar"}>
+      <App />
+    </GoogleOAuthProvider>
+  </React.StrictMode>
 );
 
 
