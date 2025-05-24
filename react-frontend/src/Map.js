@@ -31,7 +31,7 @@ const Map = () => {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     });
-                    axios.get('http://localhost:5000/api/geocode', {
+                    axios.get('http://127.0.0.1:5000/api/geocode', {
                         params: { lat: position.coords.latitude, long: position.coords.longitude }
                     })
                         .then(response => {
@@ -44,7 +44,7 @@ const Map = () => {
                 },
                 () => {
                     alert('Unable to retrieve your location.');
-                    axios.get('http://localhost:5000/api/geocode')
+                    axios.get('http://127.0.0.1:5000/api/geocode')
                         .then(response => {
                             setHospitals(response.data || []);
                         })
@@ -55,7 +55,7 @@ const Map = () => {
             );
         } else {
             alert('Geolocation is not supported by your browser.');
-            axios.get('http://localhost:5000/api/geocode')
+            axios.get('http://127.0.0.1:5000/api/geocode')
                 .then(response => {
                     setHospitals(response.data || []);
                 })
