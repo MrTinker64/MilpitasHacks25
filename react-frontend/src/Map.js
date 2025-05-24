@@ -12,7 +12,7 @@ L.Icon.Default.mergeOptions({
     shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-// Example shelters
+// (Optional) Example shelters, remove if not needed
 const shelters = [
     { name: "Milpitas Community Center", lat: 37.4323, lng: -121.8996 },
     { name: "Milpitas Sports Center", lat: 37.4329, lng: -121.9072 },
@@ -35,6 +35,7 @@ const Map = () => {
                         params: { lat: position.coords.latitude, long: position.coords.longitude }
                     })
                         .then(response => {
+                            // If backend returns array of objects [{name, latitude, longitude}, ...]
                             setHospitals(response.data || []);
                         })
                         .catch(error => {
@@ -64,7 +65,7 @@ const Map = () => {
         }
     }, []);
 
-    // Center map on user location if available, otherwise on first shelter
+    // Center map on user location if available, otherwise on first shelter, otherwise fallback
     const center = location
         ? [location.lat, location.lng]
         : shelters.length > 0
@@ -97,6 +98,7 @@ const Map = () => {
                         </Popup>
                     </Marker>
                 ))}
+                {/* Remove shelters section below if you don't want static shelters */}
                 {shelters.map((shelter, idx) => (
                     <Marker key={`shelter-${idx}`} position={[shelter.lat, shelter.lng]}>
                         <Popup>
@@ -105,6 +107,7 @@ const Map = () => {
                     </Marker>
                 ))}
             </MapContainer>
+            {/* Remove this section if you don't want to list shelters */}
             <div style={{ marginTop: '10px', textAlign: 'center' }}>
                 <b>Emergency Shelters:</b>
                 <ul style={{ listStyle: 'none', padding: 0 }}>
