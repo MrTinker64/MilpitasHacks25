@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ItemList from './OutputList';
 import Reminder from './Reminder';
+import { GOOGLE_CLIENT_SECRET } from './secrets';
 
 const App = () => {
     const [data, setData] = useState({"message": '', "name": ''});
@@ -39,6 +40,8 @@ const App = () => {
 
     return (
         <div>
+            <script src="https://apis.google.com/js/platform.js" async defer></script>
+            <meta name="google-signin-client_id" content={GOOGLE_CLIENT_SECRET + ".apps.googleusercontent.com"}></meta>
             <h1>Place holder website name</h1>
             <h2>Emergency Kit:</h2>
             <ItemList items={LLMoutput} />

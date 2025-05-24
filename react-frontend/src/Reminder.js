@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-import { GOOGLE_CLIENT_SECRET } from './secrets';
+import { GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID } from './secrets';
 
 const Reminder = ({ items = [] }) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [isSettingReminders, setIsSettingReminders] = useState(false);
   const [status, setStatus] = useState('');
-  const SCOPES = 'https://www.googleapis.com/auth/calendar';
 
   // Handle successful Google sign-in
   const handleSuccess = async (credentialResponse) => {
@@ -24,7 +23,7 @@ const Reminder = ({ items = [] }) => {
       
       // Get access token for Google Calendar API
       const authInstance = window.google.accounts.oauth2.initTokenClient({
-        client_id: GOOGLE_CLIENT_SECRET,
+        client_id: GOOGLE_CLIENT_ID,
         scope: 'https://www.googleapis.com/auth/calendar',
         callback: (tokenResponse) => {
           if (tokenResponse && tokenResponse.access_token) {
@@ -65,7 +64,7 @@ const Reminder = ({ items = [] }) => {
     setStatus('Setting up reminders...');
   
     try {
-      const token = GOOGLE_CLIENT_SECRET;
+      const token = localStorage.getItem('google_access_token');
       if (!token) {
         throw new Error('No access token found. Please sign in again.');
       }
