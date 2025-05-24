@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { GoogleOAuthProvider, GoogleLogin, googleLogout } from '@react-oauth/google';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-import { GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID } from './secrets';
+import { GOOGLE_CLIENT_ID } from './secrets';
 
 const Reminder = ({ items = [] }) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
