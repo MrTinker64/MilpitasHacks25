@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import List from "./List"
+import Map from './Map';
 import axios from 'axios';
 import ItemList from './OutputList';
 
@@ -65,6 +66,7 @@ const App = () => {
             </h2>
             <List />
             <ItemList items={LLMoutput} />
+            <Map />
         </div>
     );
 };
