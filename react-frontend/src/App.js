@@ -40,8 +40,6 @@ const App = () => {
 
     return (
         <div>
-            <script src="https://apis.google.com/js/platform.js" async defer></script>
-            <meta name="google-signin-client_id" content={GOOGLE_CLIENT_SECRET + ".apps.googleusercontent.com"}></meta>
             <h1>Place holder website name</h1>
             <h2>Emergency Kit:</h2>
             <ItemList items={LLMoutput} />
