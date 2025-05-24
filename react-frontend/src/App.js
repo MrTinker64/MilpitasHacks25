@@ -68,6 +68,25 @@ const App = () => {
                     ⚠️ Emergency Essentials Hub ⚠️
                 </h1>
             </div>
+            <h4
+                    style={{
+                        textAlign: 'center',
+                        marginLeft: '50px',
+                        marginRight: '50px',
+                        borderBlock: 'solid',
+                        borderBlockWidth: '3px',
+                        borderBlockColor: 'rgb(255, 251, 0)',
+                        background: 'rgba(0, 0, 0, 0.82)',
+                        color: 'rgb(255, 255, 255)',
+                        borderRadius: '8px',
+                        padding: '12px 18px',
+                        fontWeight: 'bold',
+                        boxShadow: '0 2px 8px rgba(255,81,47,0.08)',
+                        textShadow: '0 0px 8px rgb(255, 179, 47), 0 2px 8px #232526'
+                    }}
+                >
+                    🚨 Roughly 70% of Americans don't have an emergency kit in case of a natural disaster. Make yourself one of the 30% with this website! Add items to your list, set expiration reminders via Google reminders, and locate nearby shelters!
+                </h4>
             <div style={{
                 maxWidth: '900px',
                 margin: '0 auto',
@@ -78,24 +97,6 @@ const App = () => {
             }}>
                 <GenerateKit />
                 <Map />
-                <h4
-                    style={{
-                        textAlign: 'end',
-                        marginLeft: '50px',
-                        marginRight: '50px',
-                        borderBlock: 'solid',
-                        borderBlockWidth: '3px',
-                        borderBlockColor: '#ff512f',
-                        background: 'rgba(255,204,0,0.10)',
-                        color: '#232526',
-                        borderRadius: '8px',
-                        padding: '12px 18px',
-                        fontWeight: 'bold',
-                        boxShadow: '0 2px 8px rgba(255,81,47,0.08)'
-                    }}
-                >
-                    🚨 Roughly 70% of Americans don't have an emergency kit in case of a natural disaster. Make yourself one of the 30% with this website! Add items to your list, set expiration reminders via Google reminders, and locate nearby shelters!
-                </h4>
                 <List />
             </div>
         </div>
