@@ -27,7 +27,7 @@ const List = () => {
     };
 
     const inputStyle = {
-        width: '100%',
+        width: '90%',
         padding: '10px',
         marginBottom: '18px',
         borderRadius: '6px',
