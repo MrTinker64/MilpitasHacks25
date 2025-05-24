@@ -3,6 +3,8 @@ import List from "./List"
 import Map from './Map';
 import axios from 'axios';
 import ItemList from './OutputList';
+import Reminder from './Reminder';
+import { GOOGLE_CLIENT_SECRET } from './secrets';
 
 const App = () => {
     const [data, setData] = useState({"message": '', "name": ''});
@@ -66,6 +68,7 @@ const App = () => {
             </h2>
             <List />
             <ItemList items={LLMoutput} />
+            <Reminder items={LLMoutput} />
             <Map />
         </div>
     );
