@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import List from "./List"
+import Map from './Map';
 import axios from 'axios';
 import ItemList from './OutputList';
 import Reminder from './Reminder';
@@ -40,12 +42,34 @@ const App = () => {
 
     return (
         <div>
-            <script src="https://apis.google.com/js/platform.js" async defer></script>
-            <meta name="google-signin-client_id" content={GOOGLE_CLIENT_SECRET + ".apps.googleusercontent.com"}></meta>
-            <h1>Place holder website name</h1>
-            <h2>Emergency Kit:</h2>
+            <h1
+                style={{
+                    fontFamily: 'Montserrat, sans-serif',
+                    color: '#1976d2',
+                    fontWeight: '800',
+                    fontSize: '2.8em',
+                    letterSpacing: '2px',
+                    textAlign: 'center',
+                    marginTop: '32px',
+                    marginBottom: '12px',
+                    textShadow: '0 2px 8px rgba(25, 118, 210, 0.08)'
+                }}
+            >
+                Emergency Essentials Hub
+            </h1>
+            <h2 style={{
+                textAlign: 'center',
+                color: '#333',
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: '600',
+                marginBottom: '28px'
+            }}>
+                Emergency Kit:
+            </h2>
+            <List />
             <ItemList items={LLMoutput} />
             <Reminder items={LLMoutput} />
+            <Map />
         </div>
     );
 };

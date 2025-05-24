@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { GOOGLE_CLIENT_ID } from './secrets';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID} scope={"https://www.googleapis.com/auth/calendar"}>
@@ -15,6 +16,7 @@ root.render(
     </GoogleOAuthProvider>
   </React.StrictMode>
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

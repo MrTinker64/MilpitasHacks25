@@ -1,38 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const ItemInput = () => {
-    const [item, setItem] = useState("");
+const List = () => {
+    const [items, setItems] = useState("");
 
-    const handleSubmit = (event) => {
-        axios.post('http://localhost:5000/endpoint/itemForm', item)
-            .then(response => {
-                console.log('Success:', response.data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('/endpoint/itemform', { items });
+    };
 
-    return(
-        <form onSubmit={handleSubmit}>
-            <label>Enter your name:
-                <input 
-                type="text" 
-                value={item}
-                onChange={(e) => setItem(e.target.value)}
+    const formStyle = {
+        maxWidth: '400px',
+        margin: '40px auto',
+        padding: '24px',
+        borderRadius: '12px',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+        background: '#fff',
+        fontFamily: 'sans-serif'
+    };
+
+    const labelStyle = {
+        display: 'block',
+        marginBottom: '12px',
+        fontWeight: 'bold',
+        fontSize: '1.1em'
+    };
+
+    const inputStyle = {
+        width: '90%',
+        padding: '10px',
+        marginBottom: '18px',
+        borderRadius: '6px',
+        border: '1px solid #ccc',
+        fontSize: '1em'
+    };
+
+    const buttonStyle = {
+        padding: '10px 24px',
+        borderRadius: '6px',
+        border: 'none',
+        background: '#1976d2',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: '1em',
+        cursor: 'pointer'
+    };
+
+    return (
+        <form style={formStyle} onSubmit={handleSubmit}>
+            <label style={labelStyle}>
+                Enter items you own (separated by commas):
+                <input
+                    style={inputStyle}
+                    type="text"
+                    value={items}
+                    onChange={(e) => setItems(e.target.value)}
+                    placeholder="e.g. laptop, phone, headphones"
                 />
             </label>
-            <input type="submit" />
+            <button style={buttonStyle} type="submit">
+                Submit
+            </button>
         </form>
-    )
-}
-
-const List = () => {
-    return (
-        <div>
-            <h1>React with Python</h1>
-        </div>
     );
 };
+
 export default List;
