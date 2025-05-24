@@ -1,39 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import ItemInput from './ItemInput';
 import axios from 'axios';
 
-const ItemInput = () => {
-    const [item, setItem] = useState("");
-
-    const handleSubmit = (event) => {
-        axios.post('http://localhost:5000/endpoint/itemForm', item)
-            .then(response => {
-                console.log('Success:', response.data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+class List extends React.Component {
+    constructor() {
+        super();
+        this.components = [];
+        this.counter = 0;
+        this.items = [];
     }
 
-    return(
-        <form onSubmit={handleSubmit}>
-            <label>Enter your name:
-                <input 
-                type="text" 
-                value={item}
-                onChange={(e) => setItem(e.target.value)}
-                />
-            </label>
-            <input type="submit" />
-        </form>
-    )
-}
+    addComponent = () => {
+        this.components = [...this.components, this.counter];
+        this.counter = this.counter + 1;
+    };
 
-const List = () => {
-    return (
-        <div>
-            <h1>React with Python</h1>
-            <p>{data}</p>
-        </div>
-    );
+    submit = () =>{
+        axios.post('http//localhost:5000/endpoint/itemForm', this.items);
+    };
+
+    handleCallback = (callback) => {
+        this.items = [...this.items, callback]
+    }
+
+    render() {
+        return (
+            <div>
+            <button onClick={this.addComponent}>Add Item</button>
+            {this.components.map((component) => (
+                <ItemInput parentCallback={this.handleCallback} key={component.id} />
+            ))}
+            <button onClick={this.submit}>Submit</button>
+            </div>
+        );
+    }
 };
 export default List;

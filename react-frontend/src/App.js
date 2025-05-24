@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import List from "./List.js"
 import axios from 'axios';
 
 
@@ -17,11 +18,7 @@ const App = () => {
 
     return (
         <div>
-            <h1>React with Python</h1>
-            <p>{data.message[0]}</p>
-            <p>{data.message[1]}</p>
-            <p>{data.message[2]}</p>
-            <p>{data.name}</p>
+            <List/>
         </div>
     );
 };
