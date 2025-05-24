@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import './index.css';
 import App from './App';
-import List from './List'
 import reportWebVitals from './reportWebVitals';
 import { GOOGLE_CLIENT_ID } from './secrets';
 
