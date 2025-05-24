@@ -15,7 +15,7 @@ def serve():
 def get_data():
     return jsonify({"message": ["Hello", "from", "Python!"], "name": "NAME!"})
 
-@app.route('/endpoint/itemForm', methods=['POST'])
+@app.route('/endpoint/itemform', methods=['POST'])
 def handle_data():
     data = request.get_json()
     items.append(data)
