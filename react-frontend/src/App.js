@@ -66,10 +66,10 @@ const App = () => {
             }}>
                 Emergency Kit:
             </h2>
-            <List />
             <ItemList items={LLMoutput} />
             <Reminder items={LLMoutput} />
             <Map />
+            <List />
         </div>
     );
 };
