@@ -47,9 +47,10 @@ const App = () => {
                     fontWeight: '800',
                     fontSize: '2.8em',
                     letterSpacing: '2px',
-                    textAlign: 'center',
+                    textAlign: 'start',
                     marginTop: '32px',
                     marginBottom: '12px',
+                    marginLeft: '32px',
                     textShadow: '0 2px 8px rgba(25, 118, 210, 0.08)'
                 }}
             >
@@ -64,6 +65,19 @@ const App = () => {
             }}>
                 Emergency Kit:
             </h2>
+            {/* <img src="ASSETS/hackathon_logo.png" alt="error"></img> */}
+            <h4
+                 style={{
+                    textAlign: 'end',
+                    marginLeft: '50px',
+                    marginRight: '50px',
+                    borderBlock: 'solid',
+                    borderBlockWidth: '3px',
+                    borderBlockColor: 'lightblue'
+                 }} 
+                 > 
+                 Roughly 70% of Americans don't have an emergency kit in case of a natural disaster, make yourself one of the 30% with this website! Add items to your list, set expiration reminders via Google reminders, and locate nearby shelters!
+                 </h4>
             <List />
             <ItemList items={LLMoutput} />
             <Map />
