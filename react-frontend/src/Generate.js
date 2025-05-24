@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ItemList from './OutputList';
 import Reminder from './Reminder';
 
 const GenerateKit = () => {
   const [showKit, setShowKit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [location, setLocation] = useState(null);
+
+  useEffect(() => {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(
+                  (position) => {
+                      setLocation({
+                          lat: position.coords.latitude,
+                          lng: position.coords.longitude
+                      });
+                  },
+                  () => {
+                      alert('Unable to retrieve your location.');
+                  }
+              );
+          } else {
+              alert('Geolocation is not supported by your browser.');
+          }
+      }, []);
 
   // Sample emergency kit data - replace with your actual data source
   const emergencyKit = [
