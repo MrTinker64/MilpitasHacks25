@@ -32,7 +32,6 @@ const List = () => {
     return (
         <div>
             <h1>React with Python</h1>
-            <p>{data}</p>
         </div>
     );
 };
