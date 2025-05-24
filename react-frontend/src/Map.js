@@ -64,14 +64,21 @@ const Map = () => {
         }
     }, []);
 
-    // Center map on user, or first shelter, or fallback
+    // Center map on user location if available, otherwise on first shelter
     const center = location
         ? [location.lat, location.lng]
-        : [shelters[0].lat, shelters[0].lng];
+        : shelters.length > 0
+            ? [shelters[0].lat, shelters[0].lng]
+            : [37.4323, -121.8996]; // fallback to Milpitas if no shelters
 
     return (
         <div style={{ width: '100%', height: '420px', margin: '32px auto', maxWidth: '600px', marginBottom: '100px' }}>
-            <MapContainer center={center} zoom={14} style={{ height: '400px', width: '100%', borderRadius: '12px' }}>
+            <MapContainer
+                center={center}
+                zoom={14}
+                style={{ height: '400px', width: '100%', borderRadius: '12px' }}
+                key={center.join(',')} // force recenter on location change
+            >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
