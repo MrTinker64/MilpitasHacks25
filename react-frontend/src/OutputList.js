@@ -17,17 +17,22 @@ const ItemList = ({ items = [] }) => {
         <div style={styles.grid}>
           {items.map((item, index) => (
             <div 
-              key={index} 
+              key={index}
               style={{
                 ...styles.card,
-                opacity: checkedItems[item.item_name] ? 0.5 : 1,
-                borderLeft: checkedItems[item.item_name] 
-                  ? '4px solid #4CAF50' 
-                  : '4px solid #4a90e2'
+                ...(checkedItems[item.item_name]
+                  ? { opacity: 0.5, borderLeft: '4px solid #4CAF50' }
+                  : styles.cardUrgent)
               }}
             >
-              <div style={styles.cardHeader}>
-                <h3 style={styles.itemName}>
+              <div style={{
+                ...styles.cardHeader,
+                ...(checkedItems[item.item_name] ? {} : {})
+              }}>
+                <h3 style={{
+                  ...styles.itemName,
+                  ...(checkedItems[item.item_name] ? {} : styles.itemNameUrgent)
+                }}>
                   <input
                     type="checkbox"
                     checked={!!checkedItems[item.item_name]}
@@ -78,7 +83,7 @@ const styles = {
     padding: '0',
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
     borderRadius: '8px',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
     padding: '14px 12px',
@@ -89,6 +94,13 @@ const styles = {
     flexDirection: 'column',
     minWidth: 0,
     overflowWrap: 'break-word',
+  },
+  cardUrgent: {
+    borderLeft: '6px solid #e53935',
+    backgroundColor: '#fff5f5',
+    color: '#b71c1c',
+    boxShadow: '0 2px 12px rgba(229,57,53,0.08)',
+    animation: 'pulse 1.2s infinite alternate',
   },
   cardHeader: {
     display: 'flex',
@@ -103,6 +115,11 @@ const styles = {
     alignItems: 'center',
     gap: '8px',
     overflowWrap: 'break-word',
+  },
+  itemNameUrgent: {
+    color: '#e53935',
+    fontWeight: 'bold',
+    letterSpacing: '1px',
   },
   checkbox: {
     width: '16px',
@@ -134,5 +151,13 @@ const styles = {
     padding: '20px 10px',
   },
 };
+
+// Add this to your CSS (e.g., in App.css) for the pulse animation:
+/*
+@keyframes pulse {
+  from { box-shadow: 0 0 0 0 rgba(229,57,53,0.2); }
+  to { box-shadow: 0 0 8px 4px rgba(229,57,53,0.12); }
+}
+*/
 
 export default ItemList;
