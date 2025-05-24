@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import List from "./List.js"
+import List from "./List"
 import axios from 'axios';
 import ItemList from './OutputList';
 
@@ -42,6 +42,7 @@ const App = () => {
             <h1>Place holder website name</h1>
             <h2>Emergency Kit:</h2>
             <ItemList items={LLMoutput} />
+            <List />
         </div>
     );
 };
