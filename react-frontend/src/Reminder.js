@@ -8,6 +8,7 @@ const Reminder = ({ items = [] }) => {
   const [user, setUser] = useState(null);
   const [isSettingReminders, setIsSettingReminders] = useState(false);
   const [status, setStatus] = useState('');
+  const [isGettingToken, setIsGettingToken] = useState(false);
 
   // Handle successful Google sign-in
   const handleSuccess = async (credentialResponse) => {
@@ -15,8 +16,8 @@ const Reminder = ({ items = [] }) => {
       // Get user info from ID token
       const userObject = jwtDecode(credentialResponse.credential);
       setUser(userObject);
-      setIsSignedIn(true);
-      setStatus('Successfully signed in!');
+      setStatus('Getting calendar access...');
+      setIsGettingToken(true);
       
       // Store the credential response for user info
       localStorage.setItem('google_credential', credentialResponse.credential);
@@ -26,8 +27,14 @@ const Reminder = ({ items = [] }) => {
         client_id: GOOGLE_CLIENT_ID,
         scope: 'https://www.googleapis.com/auth/calendar',
         callback: (tokenResponse) => {
+          setIsGettingToken(false);
           if (tokenResponse && tokenResponse.access_token) {
             localStorage.setItem('google_access_token', tokenResponse.access_token);
+            setIsSignedIn(true);
+            setStatus('Successfully signed in with calendar access!');
+          } else if (tokenResponse.error) {
+            console.error('Token error:', tokenResponse.error);
+            setStatus('Failed to get calendar access. Please try again.');
           }
         },
       });
@@ -36,6 +43,7 @@ const Reminder = ({ items = [] }) => {
     } catch (error) {
       console.error('Error handling sign in:', error);
       setStatus('Error during sign in. Please try again.');
+      setIsGettingToken(false);
     }
   };
 
@@ -48,6 +56,8 @@ const Reminder = ({ items = [] }) => {
   // Handle sign out
   const handleSignOut = () => {
     googleLogout();
+    localStorage.removeItem('google_access_token');
+    localStorage.removeItem('google_credential');
     setUser(null);
     setIsSignedIn(false);
     setStatus('Signed out successfully.');
@@ -101,6 +111,13 @@ const Reminder = ({ items = [] }) => {
           body: JSON.stringify(event),
         });
   
+        if (response.status === 401) {
+          // Token expired or invalid
+          localStorage.removeItem('google_access_token');
+          setIsSignedIn(false);
+          throw new Error('Session expired. Please sign in again.');
+        }
+  
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(`Failed to create event for ${item.item_name}: ${errorData.error?.message || 'Unknown error'}`);
@@ -135,7 +152,7 @@ const Reminder = ({ items = [] }) => {
     <div style={styles.container}>
       <h2>Set Up Restock Reminders</h2>
       
-      {!isSignedIn ? (
+      {!isSignedIn && !isGettingToken ? (
         <div style={styles.authContainer}>
           <p>Sign in with Google to set up restock reminders:</p>
           <GoogleLogin
@@ -143,6 +160,10 @@ const Reminder = ({ items = [] }) => {
             onError={handleError}
             useOneTap
           />
+        </div>
+      ) : isGettingToken ? (
+        <div style={styles.authContainer}>
+          <p>Getting calendar access permissions...</p>
         </div>
       ) : (
         <div>
