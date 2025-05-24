@@ -6,7 +6,7 @@ const List = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/endpoint/itemform', { items });
+        axios.post('/endpoint/itemform', { items });
     };
 
     const formStyle = {
