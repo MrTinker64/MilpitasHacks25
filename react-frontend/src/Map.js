@@ -44,7 +44,7 @@ const Map = () => {
         : [shelters[0].lat, shelters[0].lng];
 
     return (
-        <div style={{ width: '100%', height: '420px', margin: '32px auto', maxWidth: '600px' }}>
+        <div style={{ width: '100%', height: '420px', margin: '32px auto', maxWidth: '600px', marginBottom: '100px' }}>
             <MapContainer center={center} zoom={14} style={{ height: '400px', width: '100%', borderRadius: '12px' }}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
