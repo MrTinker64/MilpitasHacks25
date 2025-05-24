@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import axios from 'axios';
 
 // Fix default marker icon issue in Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -11,6 +12,7 @@ L.Icon.Default.mergeOptions({
     shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
+// Example shelters
 const shelters = [
     { name: "Milpitas Community Center", lat: 37.4323, lng: -121.8996 },
     { name: "Milpitas Sports Center", lat: 37.4329, lng: -121.9072 },
@@ -19,6 +21,7 @@ const shelters = [
 
 const Map = () => {
     const [location, setLocation] = useState(null);
+    const [hospitals, setHospitals] = useState([]);
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -28,17 +31,40 @@ const Map = () => {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     });
+                    axios.get('http://localhost:5000/api/hospitals', {
+                        params: { lat: position.coords.latitude, long: position.coords.longitude }
+                    })
+                        .then(response => {
+                            setHospitals(response.data || []);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching hospital data:', error);
+                        });
                 },
                 () => {
                     alert('Unable to retrieve your location.');
+                    axios.get('http://localhost:5000/api/hospitals')
+                        .then(response => {
+                            setHospitals(response.data || []);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching hospital data:', error);
+                        });
                 }
             );
         } else {
             alert('Geolocation is not supported by your browser.');
+            axios.get('http://localhost:5000/api/hospitals')
+                .then(response => {
+                    setHospitals(response.data || []);
+                })
+                .catch(error => {
+                    console.error('Error fetching hospital data:', error);
+                });
         }
     }, []);
 
-    // Center map on user or first shelter
+    // Center map on user, or first shelter, or fallback
     const center = location
         ? [location.lat, location.lng]
         : [shelters[0].lat, shelters[0].lng];
@@ -57,8 +83,15 @@ const Map = () => {
                         </Popup>
                     </Marker>
                 )}
+                {hospitals.map((hospital, idx) => (
+                    <Marker key={`hospital-${idx}`} position={[hospital.latitude, hospital.longitude]}>
+                        <Popup>
+                            <b>{hospital.name}</b>
+                        </Popup>
+                    </Marker>
+                ))}
                 {shelters.map((shelter, idx) => (
-                    <Marker key={idx} position={[shelter.lat, shelter.lng]}>
+                    <Marker key={`shelter-${idx}`} position={[shelter.lat, shelter.lng]}>
                         <Popup>
                             <b>{shelter.name}</b>
                         </Popup>
