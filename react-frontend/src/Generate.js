@@ -1,11 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import ItemList from './OutputList';
 import Reminder from './Reminder';
+import axios from 'axios';
 
 const GenerateKit = () => {
   const [showKit, setShowKit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState(null);
+  const [emergencyKit, setEmergencyKit] = useState([
+    {
+      "item_name": "Water",
+      "description": "Bottled water for drinking and sanitation",
+      "quantity": "1 gallon per person per day for at least 3 days",
+      "expiration": "Check expiration date on bottles, typically 1-2 years"
+    },
+    {
+      "item_name": "Non-perishable Food",
+      "description": "Canned goods, energy bars, and other non-perishable food items",
+      "quantity": "At least a 3-day supply per person",
+      "expiration": "Check expiration dates regularly, typically 6-12 months"
+    },
+    {
+      "item_name": "First Aid Kit",
+      "description": "Basic medical supplies including bandages, antiseptic, and medications",
+      "quantity": "1 comprehensive kit per household",
+      "expiration": "Check medications and supplies every 6 months"
+    }
+  ]);
 
   useEffect(() => {
           if (navigator.geolocation) {
@@ -25,37 +46,35 @@ const GenerateKit = () => {
           }
       }, []);
 
-  // Sample emergency kit data - replace with your actual data source
-  const emergencyKit = [
-    {
-      "item_name": "Water",
-      "description": "Bottled water for drinking and sanitation",
-      "quantity": "1 gallon per person per day for at least 3 days",
-      "expiration": "Check expiration date on bottles, typically 1-2 years"
-    },
-    {
-      "item_name": "Non-perishable Food",
-      "description": "Canned goods, energy bars, and other non-perishable food items",
-      "quantity": "At least a 3-day supply per person",
-      "expiration": "Check expiration dates regularly, typically 6-12 months"
-    },
-    {
-      "item_name": "First Aid Kit",
-      "description": "Basic medical supplies including bandages, antiseptic, and medications",
-      "quantity": "1 comprehensive kit per household",
-      "expiration": "Check medications and supplies every 6 months"
-    }
-  ];
-
   const handleGenerateClick = async () => {
     setIsLoading(true);
     try {
-      // Here you can add any API calls or data processing
-      // For now, we'll just simulate a loading delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // First get the user's location
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        });
+      });
+  
+      const { latitude, longitude } = position.coords;
+      setLocation({ lat: latitude, lng: longitude });
+  
+      // Call your AI endpoint with the location
+      const response = await axios.post('http://localhost:5000/api/generate-kit', {
+        latitude,
+        longitude
+      });
+  
+      // Update the emergency kit with the AI's response
+      setEmergencyKit(response.data.items || []);
       setShowKit(true);
+      
     } catch (error) {
       console.error('Error generating kit:', error);
+      // Fallback to default kit if there's an error
+      setShowKit(true);
     } finally {
       setIsLoading(false);
     }

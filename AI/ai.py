@@ -9,7 +9,7 @@ To run, type "python AI/ai.py" into the terminal. The regular run button generat
 import os
 from openai import OpenAI
 from google import genai
-from apikeys import openaikey, geminikey
+from AI.apikeys import openaikey, geminikey
 
 os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY', openaikey)
 os.environ['GOOGLE_API_KEY'] = os.getenv('GOOGLE_API_KEY', geminikey)
@@ -48,4 +48,4 @@ def call_gemini(user_prompttt):
    return f"Gemini: {response}"
 
 #print(call_gpt(prompts))
-print(call_gemini(user_prompt))
+# print(call_gemini(user_prompt))

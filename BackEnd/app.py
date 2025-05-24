@@ -3,8 +3,16 @@ from flask_cors import CORS
 from flask import send_from_directory
 from geopy.geocoders import Nominatim
 import requests
-import json
 import time
+
+import sys
+import os
+
+# Add the project root directory to the Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Now you can import from AI package
+from AI.ai import call_gemini, call_gpt
 
 geolocator = Nominatim(user_agent="app") # Replace "your_app_name" with a descriptive name for your application
 
@@ -34,6 +42,11 @@ items = []
 @app.route('/')
 def serve():
     return send_from_directory('react-frontend/build', 'index.html')
+
+@app.route('/api/generate-kit', methods=['POST'])
+def generate_kit(latitude, longitude):
+    prompt = "Put together a list of supplies for an emergency kit, in preparation for a local natural disaster (based on the user's location of", latitude, longitude + "). Respond as json with item name, description, quantity, and expiration. For expiration, responses should be as quantitative as possible: a specific amount of time, not range (if applicable) is ideal. If an entry consists of multiple items with differnt expiration dates, state the most recent one. Also, if applicable, provide amazon search links where each item can be obtained."
+    return call_gemini(prompt)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
