@@ -20,7 +20,7 @@ const ItemList = ({ items = [] }) => {
               key={index} 
               style={{
                 ...styles.card,
-                opacity: checkedItems[item.item_name] ? 0.7 : 1,
+                opacity: checkedItems[item.item_name] ? 0.5 : 1,
                 borderLeft: checkedItems[item.item_name] 
                   ? '4px solid #4CAF50' 
                   : '4px solid #4a90e2'
