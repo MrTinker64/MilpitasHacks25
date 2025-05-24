@@ -45,7 +45,8 @@ def call_gemini(user_prompttt):
       contents=[f"{user_prompttt}"]
       #temperature=temp
    )
-   return f"Gemini: {response}"
+   print(response)
+   return response
 
 #print(call_gpt(prompts))
 # print(call_gemini(user_prompt))
