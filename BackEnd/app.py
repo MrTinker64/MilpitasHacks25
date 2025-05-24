@@ -14,4 +14,4 @@ def get_data():
     return jsonify({"message": "Hello from Python!"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
