@@ -1,15 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ItemList = ({ items = [] }) => {
-  // Default empty array if items is undefined
-  
+  // Track checked state for each item
+  const [checkedItems, setCheckedItems] = useState({});
+
+  const handleCheckboxChange = (itemName) => {
+    setCheckedItems(prev => ({
+      ...prev,
+      [itemName]: !prev[itemName]
+    }));
+  };
+
   return (
     <div style={styles.container}>
       {items.length > 0 ? (
         <div style={styles.grid}>
           {items.map((item, index) => (
-            <div key={index} style={styles.card}>
-              <h3 style={styles.itemName}>{item.item_name}</h3>
+            <div 
+              key={index} 
+              style={{
+                ...styles.card,
+                opacity: checkedItems[item.item_name] ? 0.7 : 1,
+                borderLeft: checkedItems[item.item_name] 
+                  ? '4px solid #4CAF50' 
+                  : '4px solid #4a90e2'
+              }}
+            >
+              <div style={styles.cardHeader}>
+                <h3 style={styles.itemName}>
+                  <input
+                    type="checkbox"
+                    checked={!!checkedItems[item.item_name]}
+                    onChange={() => handleCheckboxChange(item.item_name)}
+                    style={styles.checkbox}
+                  />
+                  {item.item_name}
+                </h3>
+              </div>
               
               <div style={styles.detailSection}>
                 <span style={styles.label}>Description:</span>
@@ -55,7 +82,7 @@ const styles = {
     borderRadius: '8px',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
     padding: '20px',
-    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+    transition: 'all 0.3s ease',
     borderLeft: '4px solid #4a90e2',
     height: '100%',
     display: 'flex',
@@ -65,12 +92,24 @@ const styles = {
       boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
     },
   },
+  cardHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '15px',
+  },
   itemName: {
-    margin: '0 0 15px 0',
+    margin: 0,
     color: '#2c3e50',
     fontSize: '1.4rem',
-    borderBottom: '1px solid #eee',
-    paddingBottom: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+  },
+  checkbox: {
+    width: '18px',
+    height: '18px',
+    margin: 0,
+    cursor: 'pointer',
   },
   detailSection: {
     marginBottom: '12px',
