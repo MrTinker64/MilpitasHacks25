@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom/client';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
 
 const App = () => {
     const [data, setData] = useState('');
@@ -21,5 +24,4 @@ const App = () => {
         </div>
     );
 };
-
 export default App;
