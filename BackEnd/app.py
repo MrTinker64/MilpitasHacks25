@@ -48,6 +48,7 @@ def handle_data():
 
 @app.route('/api/geocode', methods=['GET'])
 def geocode():
+    print("hi")
     lat = request.args.get('lat')
     long = request.args.get('long')
 
