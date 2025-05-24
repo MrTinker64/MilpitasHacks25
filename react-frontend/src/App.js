@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import List from "./List"
 import Map from './Map';
 import axios from 'axios';
-import ItemList from './OutputList';
+import GenerateKit from './Generate';
 
 const App = () => {
     const [data, setData] = useState({"message": '', "name": ''});
@@ -56,15 +56,8 @@ const App = () => {
             >
                 Emergency Essentials Hub
             </h1>
-            <h2 style={{
-                textAlign: 'center',
-                color: '#333',
-                fontFamily: 'Montserrat, sans-serif',
-                fontWeight: '600',
-                marginBottom: '28px'
-            }}>
-                Emergency Kit:
-            </h2>
+            <GenerateKit />
+            <Map />
             {/* <img src="ASSETS/hackathon_logo.png" alt="error"></img> */}
             <h4
                  style={{
@@ -79,8 +72,6 @@ const App = () => {
                  Roughly 70% of Americans don't have an emergency kit in case of a natural disaster, make yourself one of the 30% with this website! Add items to your list, set expiration reminders via Google reminders, and locate nearby shelters!
                  </h4>
             <List />
-            <ItemList items={LLMoutput} />
-            <Map />
         </div>
     );
 };
