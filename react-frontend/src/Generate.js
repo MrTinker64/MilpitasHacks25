@@ -129,7 +129,6 @@ const GenerateKit = () => {
 
   return (
     <div style={{ margin: '40px 0' }}>
-        <p> location: {location.lat}, {location.lng}</p>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
         <div style={{ marginBottom: '40px' }}>
           <h2 style={{
