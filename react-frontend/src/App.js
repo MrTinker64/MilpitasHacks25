@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ItemList from './OutputList';
+import Reminder from './Reminder';
 
 const App = () => {
     const [data, setData] = useState({"message": '', "name": ''});
@@ -41,6 +42,7 @@ const App = () => {
             <h1>Place holder website name</h1>
             <h2>Emergency Kit:</h2>
             <ItemList items={LLMoutput} />
+            <Reminder items={LLMoutput} />
         </div>
     );
 };
