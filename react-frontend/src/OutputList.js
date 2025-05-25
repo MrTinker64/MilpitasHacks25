@@ -90,7 +90,8 @@ const styles = {
   grid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    gap: '12px',
+    rowGap: '45px',
+    columnGap: '15px',
     padding: '0',
   },
   card: {
