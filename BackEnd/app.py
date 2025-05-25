@@ -67,7 +67,7 @@ def handle_data():
 
 @app.route('/api/geocode', methods=['GET'])
 def geocode():
-    print("hi")
+    # print("hi")
     lat = request.args.get('lat')
     long = request.args.get('long')
 
@@ -108,19 +108,20 @@ def geocode():
     lats = []
     longs = []
     names_out = []
-    for entry in addresses:
-        try:
-            print("Geocoding:", entry['address'])
-            loc = geolocator.geocode(entry['address'])
-            if loc:
-                lats.append(loc.latitude)
-                longs.append(loc.longitude)
-                names_out.append(entry['name'])
-            else:
-                print("Failed to geocode:", entry['address'])
-            time.sleep(1)  # Respect Nominatim rate limit
-        except Exception as e:
-            print(f"Error geocoding address {entry['address']}: {e}")
+    # for entry in addresses:
+    #     try:
+    #         # print("Geocoding:", entry['address'])
+    #         loc = geolocator.geocode(entry['address'])
+    #         if loc:
+    #             lats.append(loc.latitude)
+    #             longs.append(loc.longitude)
+    #             names_out.append(entry['name'])
+    #         else:
+    #             print("Failed to geocode:", entry['address'])
+    #         time.sleep(1)  # Respect Nominatim rate limit
+    #     except Exception as e:
+    #         return jsonify({'error': str(e)}), 500
+    #         # print(f"Error geocoding address {entry['address']}: {e}")
 
     return jsonify({
         'hospitals': names_out,
