@@ -6,7 +6,6 @@ import requests
 import time
 import geopandas as gpd
 from shapely.geometry import Point
-import json
 
 import sys
 import os
@@ -15,7 +14,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Now you can import from AI package
-from AI.ai import call_gemini, call_gpt
+from AI.ai import call_gemini
 states = gpd.read_file("react-frontend/src/ASSETS/gz_2010_us_040_00_500k.json")
 
 def get_state(longitude, latitude):
