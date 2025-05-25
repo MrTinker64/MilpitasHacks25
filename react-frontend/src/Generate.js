@@ -71,6 +71,7 @@ const GenerateKit = () => {
         setShowKit(true);
       } catch (error) {
         console.error('Error generating kit:', error);
+        await new Promise(resolve => setTimeout(resolve, 2000));
         setShowKit(true);
       } finally {
         setIsLoading(false);
