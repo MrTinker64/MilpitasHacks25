@@ -47,33 +47,30 @@ const GenerateKit = () => {
       }, []);
 
   const handleGenerateClick = async () => {
+    if (!location) {
+      alert('Please enable location services and try again');
+      return;
+    }
+    
     setIsLoading(true);
     try {
-      // First get the user's location
-      const position = await new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject, {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 0
-        });
-      });
-  
-      const { latitude, longitude } = position.coords;
-      setLocation({ lat: latitude, lng: longitude });
-  
-      // Call your AI endpoint with the location
       const response = await axios.post('http://localhost:5000/api/generate-kit', {
-        latitude,
-        longitude
+        latitude: location.lat,
+        longitude: location.lng
       });
   
-      // Update the emergency kit with the AI's response
-      setEmergencyKit(response.data.items || []);
+      if (response.data && Array.isArray(response.data)) {
+        setEmergencyKit(response.data);
+      } else {
+        console.warn('Unexpected response format:', response.data);
+        // Keep the default kit if response format is unexpected
+      }
       setShowKit(true);
       
     } catch (error) {
       console.error('Error generating kit:', error);
-      // Fallback to default kit if there's an error
+      alert('Failed to generate kit. Using default kit instead.');
+      // Keep the default kit
       setShowKit(true);
     } finally {
       setIsLoading(false);

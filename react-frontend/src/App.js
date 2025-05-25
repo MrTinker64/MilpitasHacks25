@@ -2,7 +2,7 @@ import React from 'react';
 import List from "./List"
 import Map from './Map';
 import GenerateKit from './Generate';
-import hackathonLogo from './ASSETS/hackathon_logo.png'; // Adjust path if needed
+import hackathonLogo from './ASSETS/hackathon_logo.png';
 
 const App = () => {
     return (
@@ -40,14 +40,14 @@ const App = () => {
                     alt="Hackathon Logo"
                     style={{
                         position: 'absolute',
-                        bottom: '-10px', // moved up
+                        bottom: '5px',
                         left: '32px',
                         width: '90px',
                         height: 'auto',
                         filter: 'drop-shadow(0 2px 8px #ff512f88)',
                         borderRadius: '12px',
                         padding: '6px',
-                        background: 'none' // remove white background
+                        background: 'none'
                     }}
                 />
             </div>
