@@ -54,10 +54,10 @@ const GenerateKit = () => {
     
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/generate-kit', {
-        latitude: location.lat,
-        longitude: location.lng
-      });
+      const response = axios.get('http://localhost:5000/api/generate', { params: {
+        latitude: location.latitude,
+        longitude: location.longitude
+      }});
   
       if (response.data && Array.isArray(response.data)) {
         setEmergencyKit(response.data);
@@ -68,8 +68,7 @@ const GenerateKit = () => {
       setShowKit(true);
       
     } catch (error) {
-      console.error('Error generating kit:', error);
-      alert('Failed to generate kit. Using default kit instead.');
+      alert('Error generating kit: ' + error);
       // Keep the default kit
       setShowKit(true);
     } finally {

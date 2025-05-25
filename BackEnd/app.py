@@ -42,23 +42,6 @@ items = []
 def serve():
     return send_from_directory('react-frontend/build', 'index.html')
 
-@app.route('/api/generate-kit', methods=['POST'])
-def generate_kit():
-    data = request.get_json()
-    latitude = data.get('latitude')
-    longitude = data.get('longitude')
-    
-    if not latitude or not longitude:
-        return jsonify({'error': 'Latitude and longitude are required'}), 400
-        
-    prompt = f"Put together a list of supplies for an emergency kit, in preparation for a local natural disaster (based on the user's location of {latitude}, {longitude}). Respond as json with item name, description, quantity, and expiration. For expiration, responses should be as quantitative as possible: a specific amount of time, not range (if applicable) is ideal. If an entry consists of multiple items with different expiration dates, state the most recent one. Also, if applicable, provide amazon search links where each item can be obtained."
-    
-    try:
-        result = call_gemini(prompt)
-        return jsonify(result)
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
 @app.route('/api/data', methods=['GET'])
 def get_data():
     print("hi")
@@ -126,6 +109,22 @@ def geocode():
         'hospitals_lat': lats,
         'hospitals_long': longs
     })
+
+@app.route('/api/generate', methods=['GET'])
+def generate():
+    latitude = request.args.get('latitude')
+    longitude = request.args.get('longitude')
+    
+    if not latitude or not longitude:
+        return jsonify({'error': 'Latitude and longitude are required'}), 400
+        
+    prompt = f"Put together a list of supplies for an emergency kit, in preparation for a local natural disaster (based on the user's location of {latitude}, {longitude}). Respond as json with item name, description, quantity, and expiration. For expiration, responses should be as quantitative as possible: a specific amount of time, not range (if applicable) is ideal. If an entry consists of multiple items with different expiration dates, state the most recent one. Also, if applicable, provide amazon search links where each item can be obtained."
+    
+    try:
+        result = call_gemini(prompt)
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
