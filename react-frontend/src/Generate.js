@@ -27,7 +27,7 @@ const GenerateKit = () => {
       "description": "Basic medical supplies including bandages, antiseptic, and medications",
       "quantity": "1 comprehensive kit per household",
       "expiration": "Check medications and supplies every 6 months",
-      "amazon_search_link": "https://www.amazon.com/first-aid-kit/s?k=first+aid+kit&i=hpc"
+      "amazon_link": "https://www.amazon.com/first-aid-kit/s?k=first+aid+kit&i=hpc"
     }
   ]);
 
