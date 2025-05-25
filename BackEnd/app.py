@@ -11,8 +11,7 @@ import os
 # Add the project root directory to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Now you can import from AI package
-from AI.ai import call_gemini, call_gpt
+from AI.ai import call_gemini
 
 geolocator = Nominatim(user_agent="app") # Replace "your_app_name" with a descriptive name for your application
 
