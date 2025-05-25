@@ -11,7 +11,7 @@ const App = () => {
                 minHeight: '100vh',
                 background: 'linear-gradient(135deg, #232526 0%, #ff512f 100%)',
                 backgroundAttachment: 'fixed',
-                paddingBottom: '40px'
+                paddingBottom: '200px' // Increased from 40px to 120px for more space at the bottom
             }}
         >
             <div style={{
@@ -76,7 +76,8 @@ const App = () => {
                 background: 'rgba(255,255,255,0.92)',
                 borderRadius: '18px',
                 boxShadow: '0 4px 32px rgba(255,81,47,0.12)',
-                padding: '32px 24px 24px 24px'
+                padding: '32px 24px 24px 24px',
+                minHeight: 'calc(100vh - 180px)' // Ensures the content area is tall enough for the map and shelter list
             }}>
                 <GenerateKit />
                 <Map />

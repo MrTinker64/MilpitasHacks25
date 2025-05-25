@@ -267,15 +267,33 @@ const Map = () => {
                 ))}
             </MapContainer>
             {/* Remove this section if you don't want to list shelters */}
-            <div style={{ marginTop: '10px', textAlign: 'center' }}>
+            {/* Emergency Shelters List in a scrollable box */}
+            <div style={{
+                marginTop: '10px',
+                textAlign: 'center'
+            }}>
                 <b>Emergency Shelters:</b>
-                <ul style={{ listStyle: 'none', padding: 0 }}>
-                    {shelters.map((shelter, idx) => (
-                        <li key={idx}>
-                            <span role="img" aria-label="shelter">🏢</span> {shelter.name}
-                        </li>
-                    ))}
-                </ul>
+                <div
+                    style={{
+                        maxHeight: '180px',
+                        overflowY: 'auto',
+                        margin: '12px auto',
+                        border: '1px solid #eee',
+                        borderRadius: '8px',
+                        background: '#fafbfc',
+                        width: '90%',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                        padding: '8px 0'
+                    }}
+                >
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                        {shelters.map((shelter, idx) => (
+                            <li key={idx} style={{ padding: '4px 0' }}>
+                                <span role="img" aria-label="shelter">🏢</span> {shelter.name}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     );
