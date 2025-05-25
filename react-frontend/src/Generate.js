@@ -71,7 +71,6 @@ const GenerateKit = () => {
         setShowKit(true);
       } catch (error) {
         console.error('Error generating kit:', error);
-        alert('Error generating kit: ' + error.message);
         setShowKit(true);
       } finally {
         setIsLoading(false);
