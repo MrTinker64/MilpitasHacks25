@@ -135,7 +135,6 @@ const styles = {
   itemNameUrgent: {
     color: '#e53935',
     fontWeight: 'bold',
-    letterSpacing: '1px',
     textShadow: '0 1px 8px #ff512f22',
   },
   checkbox: {
