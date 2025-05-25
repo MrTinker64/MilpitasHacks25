@@ -71,30 +71,34 @@ const GenerateKit = () => {
   const buttonStyle = {
     display: 'block',
     margin: '40px auto',
-    padding: '14px 32px',
-    fontSize: '1.1em',
-    fontWeight: '600',
+    padding: '16px 36px',
+    fontSize: '1.15em',
+    fontWeight: '700',
     color: '#fff',
-    backgroundColor: '#1976d2',
+    background: 'linear-gradient(90deg, #ff512f 0%, #dd2476 100%)',
     border: 'none',
-    borderRadius: '8px',
+    borderRadius: '12px',
     cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(25, 118, 210, 0.2)',
-    transition: 'all 0.3s ease',
+    boxShadow: '0 6px 24px rgba(255,81,47,0.18), 0 2px 8px rgba(221,36,118,0.10)',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+    transition: 'all 0.2s cubic-bezier(.4,2,.6,1)',
+    outline: 'none',
     ':hover': {
-      backgroundColor: '#1565c0',
-      transform: 'translateY(-2px)',
-      boxShadow: '0 6px 16px rgba(25, 118, 210, 0.3)'
+      background: 'linear-gradient(90deg, #ff512f 20%, #ff6e7f 100%)',
+      transform: 'translateY(-3px) scale(1.04)',
+      boxShadow: '0 10px 32px rgba(255,81,47,0.22), 0 4px 16px rgba(221,36,118,0.14)'
     },
     ':active': {
-      transform: 'translateY(0)',
-      boxShadow: '0 2px 8px rgba(25, 118, 210, 0.2)'
+      background: 'linear-gradient(90deg, #dd2476 0%, #ff512f 100%)',
+      transform: 'translateY(0) scale(1)',
+      boxShadow: '0 2px 8px rgba(255,81,47,0.15)'
     },
     ':disabled': {
-      backgroundColor: '#90caf9',
+      background: '#ffb3a7',
       cursor: 'not-allowed',
       transform: 'none',
-      boxShadow: '0 2px 8px rgba(25, 118, 210, 0.2)'
+      boxShadow: '0 2px 8px rgba(255,81,47,0.10)'
     }
   };
 
@@ -120,7 +124,12 @@ const GenerateKit = () => {
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
         <div style={{ marginBottom: '40px' }}>
           <h2 style={{
-            color: '#1976d2',
+            color: '#ff512f', // match button's main red color
+            background: 'linear-gradient(90deg, #ff512f 0%, #dd2476 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            textFillColor: 'transparent',
             marginBottom: '24px',
             textAlign: 'center',
             fontSize: '1.8em'

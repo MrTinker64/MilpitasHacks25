@@ -50,6 +50,7 @@ def generate_kit(latitude, longitude):
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
+    print("hi")
     return jsonify({"message": ["Hello", "from", "Python!"], "name": "NAME!"})
 
 @app.route('/endpoint/itemform', methods=['POST'])

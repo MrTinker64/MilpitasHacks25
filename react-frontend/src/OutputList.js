@@ -83,23 +83,26 @@ const styles = {
     padding: '0',
   },
   card: {
-    backgroundColor: '#fff',
+    background: '#fff',
     borderRadius: '8px',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+    boxShadow: '0 2px 12px rgba(255,81,47,0.10)',
     padding: '14px 12px',
     transition: 'all 0.3s ease',
-    borderLeft: '4px solid #4a90e2',
+    borderLeft: '6px solid',
+    borderImage: 'linear-gradient(180deg, #ff512f 0%, #dd2476 100%) 1',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
     minWidth: 0,
     overflowWrap: 'break-word',
+    color: '#232526',
   },
   cardUrgent: {
-    borderLeft: '6px solid #e53935',
-    backgroundColor: '#fff5f5',
-    color: '#b71c1c',
-    boxShadow: '0 2px 12px rgba(229,57,53,0.08)',
+    borderLeft: '6px solid',
+    borderImage: 'linear-gradient(180deg, #ff512f 0%, #e53935 100%) 1',
+    background: '#fff',
+    color: '#232526',
+    boxShadow: '0 2px 12px rgba(229,57,53,0.12)',
     animation: 'pulse 1.2s infinite alternate',
   },
   cardHeader: {
@@ -109,7 +112,7 @@ const styles = {
   },
   itemName: {
     margin: 0,
-    color: '#2c3e50',
+    color: '#232526',
     fontSize: '1.1rem',
     display: 'flex',
     alignItems: 'center',
@@ -120,6 +123,7 @@ const styles = {
     color: '#e53935',
     fontWeight: 'bold',
     letterSpacing: '1px',
+    textShadow: '0 1px 8px #ff512f22',
   },
   checkbox: {
     width: '16px',
@@ -132,14 +136,14 @@ const styles = {
   },
   label: {
     fontWeight: '600',
-    color: '#4a4a4a',
+    color: '#232526',
     display: 'block',
     marginBottom: '2px',
     fontSize: '0.85rem',
   },
   detail: {
     margin: '0',
-    color: '#666',
+    color: '#444',
     fontSize: '0.9rem',
     lineHeight: '1.4',
     overflowWrap: 'break-word',
@@ -152,11 +156,11 @@ const styles = {
   },
 };
 
-// Add this to your CSS (e.g., in App.css) for the pulse animation:
+// Add this to your CSS (e.g., App.css) for the pulse animation:
 /*
 @keyframes pulse {
-  from { box-shadow: 0 0 0 0 rgba(229,57,53,0.2); }
-  to { box-shadow: 0 0 8px 4px rgba(229,57,53,0.12); }
+  from { box-shadow: 0 0 0 0 rgba(255,81,47,0.2); }
+  to { box-shadow: 0 0 8px 4px rgba(255,81,47,0.12); }
 }
 */
 
