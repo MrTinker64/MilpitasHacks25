@@ -21,11 +21,7 @@ const ItemList = ({ items = [] }) => {
               style={{
                 ...styles.card,
                 ...(checkedItems[item.item_name]
-                  ? { 
-                      opacity: 0.7,
-                      borderImage: 'linear-gradient(180deg, #4CAF50 0%, #2E7D32 100%) 1',
-                      backgroundColor: 'rgba(76, 175, 80, 0.05)'
-                    }
+                  ? styles.cardCompleted
                   : styles.cardUrgent)
               }}
             >
@@ -94,7 +90,7 @@ const styles = {
   grid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    rowGap: '45px',
+    rowGap: '55px',
     columnGap: '15px',
     padding: '0',
   },
@@ -104,8 +100,7 @@ const styles = {
     boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
     padding: '16px 16px 16px 12px',
     transition: 'all 0.2s ease',
-    borderLeft: '6px solid',
-    borderImage: 'linear-gradient(180deg, #4CAF50 0%, #2E7D32 100%) 1',
+    border: '6px solid transparent',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -114,14 +109,13 @@ const styles = {
     position: 'relative',
     color: '#232526',
   },
+  cardCompleted: {
+    opacity: 0.5,
+    borderLeftColor: '#4CAF50',
+  },
   cardUrgent: {
-    borderLeft: '6px solid',
-    borderImage: 'linear-gradient(180deg, #ff512f 0%, #e53935 100%) 1',
-    background: '#fff',
-    color: '#232526',
-    boxShadow: '0 2px 12px rgba(255, 81, 47, 0.15)',
-    position: 'relative',
-    animation: 'pulse 1.2s infinite alternate',
+    opacity: 1,
+    borderLeftColor: '#ff512f',
   },
   cardHeader: {
     display: 'flex',
@@ -175,13 +169,5 @@ const styles = {
     padding: '20px 10px',
   },
 };
-
-// Add this to your CSS (e.g., App.css) for the pulse animation:
-/*
-@keyframes pulse {
-  from { box-shadow: 0 0 0 0 rgba(255,81,47,0.2); }
-  to { box-shadow: 0 0 8px 4px rgba(255,81,47,0.12); }
-}
-*/
 
 export default ItemList;

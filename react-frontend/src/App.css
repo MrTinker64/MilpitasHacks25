@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes pulse {
+  from { box-shadow: 0 0 0 0 rgba(255,81,47,0.2); }
+  to { box-shadow: 0 0 8px 4px rgba(255,81,47,0.12); }
+}
