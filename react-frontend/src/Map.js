@@ -21,7 +21,7 @@ const shelters = [
 
 const Map = () => {
     const [location, setLocation] = useState(null);
-    const [hospitals, setHospitals] = useState([]);
+    const [hospitals, setHospitals] = useState([{name: "", latitude: 0, longitude: 0}]);
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -36,7 +36,9 @@ const Map = () => {
                     })
                         .then(response => {
                             // If backend returns array of objects [{name, latitude, longitude}, ...]
-                            setHospitals(response.data || []);
+                            for (let i = 0; i < response.data.hospitals.length; i++) {
+                                setHospitals(...hospitals, {name: response.data.hospitals, latitude: response.data.latitude, longitude: response.data.longitude});
+                            }
                         })
                         .catch(error => {
                             console.error('Error fetching hospital data:', error);
@@ -46,7 +48,10 @@ const Map = () => {
                     alert('Unable to retrieve your location.');
                     axios.get('http://127.0.0.1:5000/api/geocode')
                         .then(response => {
-                            setHospitals(response.data || []);
+                            // If backend returns array of objects [{name, latitude, longitude}, ...]
+                            for (let i = 0; i < response.data.hospitals.length; i++) {
+                                setHospitals(...hospitals, {name: response.data.hospitals, latitude: response.data.latitude, longitude: response.data.longitude});
+                            }
                         })
                         .catch(error => {
                             console.error('Error fetching hospital data:', error);
@@ -56,12 +61,15 @@ const Map = () => {
         } else {
             alert('Geolocation is not supported by your browser.');
             axios.get('http://127.0.0.1:5000/api/geocode')
-                .then(response => {
-                    setHospitals(response.data || []);
-                })
-                .catch(error => {
-                    console.error('Error fetching hospital data:', error);
-                });
+                        .then(response => {
+                            // If backend returns array of objects [{name, latitude, longitude}, ...]
+                            for (let i = 0; i < response.data.hospitals.length; i++) {
+                                setHospitals(...hospitals, {name: response.data.hospitals, latitude: response.data.latitude, longitude: response.data.longitude});
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching hospital data:', error);
+                        });
         }
     }, []);
 
