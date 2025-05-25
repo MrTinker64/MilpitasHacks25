@@ -80,7 +80,6 @@ const App = () => {
             }}>
                 <GenerateKit />
                 <Map />
-                <List />
             </div>
         </div>
     );

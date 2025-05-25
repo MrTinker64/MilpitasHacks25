@@ -59,6 +59,17 @@ const ItemList = ({ items = [] }) => {
                   <p style={styles.detail}>{item.expiration}</p>
                 </div>
               )}
+
+              {item.amazon_link && (
+                <div style={styles.detailSection}>
+                  <span style={styles.label}>Amazon Link:</span>
+                  <p style={styles.detail}>
+                    <a href={item.amazon_link} target="_blank" rel="noopener noreferrer">
+                      Click here to purchase
+                    </a>
+                  </p>
+                </div>
+              )}
             </div>
           ))}
         </div>

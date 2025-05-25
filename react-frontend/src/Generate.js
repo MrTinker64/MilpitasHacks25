@@ -12,19 +12,22 @@ const GenerateKit = () => {
       "item_name": "Water",
       "description": "Bottled water for drinking and sanitation",
       "quantity": "1 gallon per person per day for at least 3 days",
-      "expiration": "Check expiration date on bottles, typically 1-2 years"
+      "expiration": "Check expiration date on bottles, typically 1-2 years",
+      "amazon_link": "https://www.amazon.com/bottled-water/s?k=bottled+water"
     },
     {
       "item_name": "Non-perishable Food",
       "description": "Canned goods, energy bars, and other non-perishable food items",
       "quantity": "At least a 3-day supply per person",
-      "expiration": "Check expiration dates regularly, typically 6-12 months"
+      "expiration": "Check expiration dates regularly, typically 6-12 months",
+      "amazon_link": "https://www.amazon.com/non-perishable-food/s?k=non+perishable+food"
     },
     {
       "item_name": "First Aid Kit",
       "description": "Basic medical supplies including bandages, antiseptic, and medications",
       "quantity": "1 comprehensive kit per household",
-      "expiration": "Check medications and supplies every 6 months"
+      "expiration": "Check medications and supplies every 6 months",
+      "amazon_link": "https://www.amazon.com/first-aid-kit/s?k=first+aid+kit&i=hpc"
     }
   ]);
 
@@ -54,26 +57,28 @@ const GenerateKit = () => {
     
     setIsLoading(true);
     try {
-      const response = axios.get('http://localhost:5000/api/generate', { params: {
-        latitude: location.latitude,
-        longitude: location.longitude
-      }});
-  
-      if (response.data && Array.isArray(response.data)) {
-        setEmergencyKit(response.data);
-      } else {
-        console.warn('Unexpected response format:', response.data);
-        // Keep the default kit if response format is unexpected
+        console.log('Making API call with location:', location);
+        const response = await axios.get('http://localhost:5000/api/generate', {
+          params: {
+            latitude: location.lat,  
+            longitude: location.lng   
+          }
+        });
+        console.log('API Response:', response.data);
+    
+        if (response.data && Array.isArray(response.data)) {
+          setEmergencyKit(response.data);
+        } else {
+          console.warn('Unexpected response format:', response.data);
+        }
+        setShowKit(true);
+      } catch (error) {
+        console.error('Error generating kit:', error);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        setShowKit(true);
+      } finally {
+        setIsLoading(false);
       }
-      setShowKit(true);
-      
-    } catch (error) {
-      alert('Error generating kit: ' + error);
-      // Keep the default kit
-      setShowKit(true);
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   const buttonStyle = {
