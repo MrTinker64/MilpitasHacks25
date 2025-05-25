@@ -91,12 +91,12 @@ def geocode():
 
     location = None
     hospitals = None
-    state = us_states.get(get_state(long, lat))
-    try:
-        hospitals = requests.get('https://www.communitybenefitinsight.org/api/get_hospitals.php?state=' + state)
-    except Exception as e:
-        print("Error getting hospitals:", e)
-        return jsonify({'error': 'Could not get hospitals'}), 500
+    #state = us_states.get(get_state(long, lat))
+    #try:
+    hospitals = requests.get('https://www.communitybenefitinsight.org/api/get_hospitals.php?')
+    #except Exception as e:
+      #  print("Error getting hospitals:", e)
+      #  return jsonify({'error': 'Could not get hospitals'}), 500
 
     # Extract hospital address fields
     data = hospitals.json()
