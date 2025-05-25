@@ -80,6 +80,10 @@ const Reminder = ({ items = [] }) => {
       }
   
       for (const item of items) {
+        if (item.expiration.includes('N/A')) {
+          continue;
+        }
+        
         const reminderDate = calculateReminderDate(item.expiration);
         
         const event = {
@@ -199,6 +203,9 @@ const Reminder = ({ items = [] }) => {
         <h3>Upcoming Reminders:</h3>
         <ul>
           {items.map((item, index) => {
+            if (item.expiration.includes('N/A')) {
+              return null;
+            }
             const reminderDate = calculateReminderDate(item.expiration);
             return (
               <li key={index} style={styles.reminderItem}>
