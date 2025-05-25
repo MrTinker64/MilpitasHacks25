@@ -82,7 +82,7 @@ def geocode():
 
     # Extract hospital address fields
     data = hospitals.json()
-    print(data)
+    # print(data)
     street_address = []
     city = []
     zip_code = []
