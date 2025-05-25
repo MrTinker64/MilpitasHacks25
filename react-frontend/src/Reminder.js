@@ -141,12 +141,18 @@ const Reminder = ({ items = [] }) => {
   const calculateReminderDate = (expirationText) => {
     const today = new Date();
     
-    if (expirationText.includes('1-2 years')) {
-      return new Date(today.setFullYear(today.getFullYear() + 1));
-    } else if (expirationText.includes('6-12 months')) {
-      return new Date(today.setMonth(today.getMonth() + 9));
-    } else if (expirationText.includes('every 6 months')) {
+    if (expirationText.includes('6')) {
       return new Date(today.setMonth(today.getMonth() + 6));
+    } else if (expirationText.includes('1')) {
+      return new Date(today.setFullYear(today.getFullYear() + 1));
+    } else if (expirationText.includes('2')) {
+      return new Date(today.setFullYear(today.getFullYear() + 2));
+    } else if (expirationText.includes('3')) {
+      return new Date(today.setFullYear(today.getFullYear() + 3));
+    } else if (expirationText.includes('4')) {
+      return new Date(today.setFullYear(today.getFullYear() + 4));
+    } else if (expirationText.includes('5')) {
+      return new Date(today.setFullYear(today.getFullYear() + 5));
     }
     
     return new Date(today.setMonth(today.getMonth() + 1));
