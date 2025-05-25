@@ -224,11 +224,20 @@ const Map = () => {
 
     return (
         <div style={{ width: '100%', height: '420px', margin: '32px auto', maxWidth: '600px', marginBottom: '100px' }}>
+            <div style={{
+                textAlign: 'center',
+                fontWeight: 'bold',
+                fontSize: '1.25em',
+                marginBottom: '8px',
+                letterSpacing: '1px'
+            }}>
+                🗺️ Map of Shelters
+            </div>
             <MapContainer
                 center={center}
                 zoom={14}
                 style={{ height: '400px', width: '100%', borderRadius: '12px' }}
-                key={center.join(',')} // force recenter on location change
+                key={center.join(',')}
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
