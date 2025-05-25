@@ -75,7 +75,7 @@ def geocode():
     hospitals = None
     #state = us_states.get(get_state(long, lat))
     #try:
-    hospitals = requests.get('https://www.communitybenefitinsight.org/api/get_hospitals.php?')
+    hospitals = requests.get('https://www.communitybenefitinsight.org/api/get_hospitals.php?state=CA&limit=100')
     #except Exception as e:
       #  print("Error getting hospitals:", e)
       #  return jsonify({'error': 'Could not get hospitals'}), 500
