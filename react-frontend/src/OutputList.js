@@ -21,7 +21,11 @@ const ItemList = ({ items = [] }) => {
               style={{
                 ...styles.card,
                 ...(checkedItems[item.item_name]
-                  ? { opacity: 0.5, borderLeft: '4px solid #4CAF50' }
+                  ? { 
+                      opacity: 0.7,
+                      borderImage: 'linear-gradient(180deg, #4CAF50 0%, #2E7D32 100%) 1',
+                      backgroundColor: 'rgba(76, 175, 80, 0.05)'
+                    }
                   : styles.cardUrgent)
               }}
             >
@@ -97,16 +101,17 @@ const styles = {
   card: {
     background: '#fff',
     borderRadius: '8px',
-    boxShadow: '0 2px 12px rgba(255,81,47,0.10)',
-    padding: '14px 12px',
-    transition: 'all 0.3s ease',
+    boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
+    padding: '16px 16px 16px 12px',
+    transition: 'all 0.2s ease',
     borderLeft: '6px solid',
-    borderImage: 'linear-gradient(180deg, #ff512f 0%, #dd2476 100%) 1',
+    borderImage: 'linear-gradient(180deg, #4CAF50 0%, #2E7D32 100%) 1',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
     minWidth: 0,
-    overflowWrap: 'break-word',
+    overflow: 'hidden',
+    position: 'relative',
     color: '#232526',
   },
   cardUrgent: {
@@ -114,7 +119,8 @@ const styles = {
     borderImage: 'linear-gradient(180deg, #ff512f 0%, #e53935 100%) 1',
     background: '#fff',
     color: '#232526',
-    boxShadow: '0 2px 12px rgba(229,57,53,0.12)',
+    boxShadow: '0 2px 12px rgba(255, 81, 47, 0.15)',
+    position: 'relative',
     animation: 'pulse 1.2s infinite alternate',
   },
   cardHeader: {
@@ -128,8 +134,9 @@ const styles = {
     fontSize: '1.1rem',
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
+    gap: '10px',
     overflowWrap: 'break-word',
+    transition: 'all 0.2s ease',
   },
   itemNameUrgent: {
     color: '#e53935',
@@ -138,10 +145,11 @@ const styles = {
     textShadow: '0 1px 8px #ff512f22',
   },
   checkbox: {
-    width: '16px',
-    height: '16px',
-    margin: 0,
+    width: '20px',
+    height: '20px',
+    marginRight: '8px',
     cursor: 'pointer',
+    accentColor: '#4CAF50',
   },
   detailSection: {
     marginBottom: '8px',
