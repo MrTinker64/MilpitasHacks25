@@ -60,11 +60,11 @@ const ItemList = ({ items = [] }) => {
                 </div>
               )}
 
-              {item.amazon_link && (
+              {item.amazon_search_link && (
                 <div style={styles.detailSection}>
                   <span style={styles.label}>Amazon Link:</span>
                   <p style={styles.detail}>
-                    <a href={item.amazon_link} target="_blank" rel="noopener noreferrer">
+                    <a href={item.amazon_search_link} target="_blank" rel="noopener noreferrer">
                       Click here to purchase
                     </a>
                   </p>
