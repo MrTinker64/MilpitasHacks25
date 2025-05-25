@@ -58,11 +58,14 @@ const GenerateKit = () => {
     setIsLoading(true);
     try {
         console.log('Making API call with location:', location);
-        const response = await axios.get('http://localhost:5000/api/generate', {
+        const response = await axios.get('http://127.0.0.1:5000/api/generate', {
           params: {
             latitude: location.lat,  
             longitude: location.lng   
           }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
         });
         console.log('API Response:', response.data);
     
@@ -74,7 +77,6 @@ const GenerateKit = () => {
         setShowKit(true);
       } catch (error) {
         console.error('Error generating kit:', error);
-        await new Promise(resolve => setTimeout(resolve, 2000));
         setShowKit(true);
       } finally {
         setIsLoading(false);
