@@ -4,6 +4,9 @@ from flask import send_from_directory
 from geopy.geocoders import Nominatim
 import requests
 import time
+import geopandas as gpd
+from shapely.geometry import Point
+import json
 
 import sys
 import os
@@ -13,6 +16,14 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Now you can import from AI package
 from AI.ai import call_gemini, call_gpt
+states = gpd.read_file("react-frontend/src/ASSETS/gz_2010_us_040_00_500k.json")
+
+def get_state(longitude, latitude):
+    point = Point(longitude, latitude)
+    for index, state in states.iterrows():
+        if state['geometry'].contains(point):
+            return state['name']
+    return None
 
 geolocator = Nominatim(user_agent="app") # Replace "your_app_name" with a descriptive name for your application
 
@@ -68,9 +79,8 @@ def geocode():
 
     location = None
     hospitals = None
+    state = us_states.get(get_state(long, lat))
     try:
-        location = geolocator.reverse(f"{lat},{long}")
-        state = us_states.get(location.raw['address'].get('state', ''))
         hospitals = requests.get('https://www.communitybenefitinsight.org/api/get_hospitals.php?state=' + state)
     except Exception as e:
         print("Error getting hospitals:", e)
@@ -78,11 +88,19 @@ def geocode():
 
     # Extract hospital address fields
     data = hospitals.json()
-    street_address = data.get('street_address', [])
-    city = data.get('city', [])
-    zip_code = data.get('zip_code', [])
-    state_list = data.get('state', [])
-    names = data.get('name', [])
+    print(data)
+    street_address = []
+    city = []
+    zip_code = []
+    state_list = []
+    names = []
+    
+    for hospital in data:
+        street_address.append(hospital['street_address'])
+        city.append(hospital['city'])
+        zip_code.append(hospital['zip_code'])
+        state_list.append(hospital['state'])
+        names.append(hospital['name'])
 
     addresses = []
     for i in range(len(street_address)):
@@ -112,8 +130,8 @@ def geocode():
 
     return jsonify({
         'hospitals': names_out,
-        'hospitals_lat': lats,
-        'hospitals_long': longs
+        'latitude': lats,
+        'longitude': longs
     })
 
 if __name__ == '__main__':
