@@ -9,6 +9,9 @@ import os
 from google import genai
 from apikeys import geminikey
 
+import json
+import re
+
 os.environ['GOOGLE_API_KEY'] = os.getenv('GOOGLE_API_KEY', geminikey)
 gemini = genai.Client(api_key = os.environ['GOOGLE_API_KEY'])
 
@@ -23,8 +26,9 @@ def call_gemini(user_prompttt):
       model="gemini-2.0-flash",
       contents=[f"{user_prompttt}"]
    )
-   print(response)
-   return response
+   noTildes = response.text.replace("```", "")
+   noJson = noTildes.replace("json", "")
+   return json.loads(noJson)
 
 if __name__ == "__main__":
     print(call_gemini(user_prompt))
