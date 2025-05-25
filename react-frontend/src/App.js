@@ -19,28 +19,41 @@ const App = () => {
                 padding: '24px 0 12px 0',
                 marginBottom: '24px',
                 boxShadow: '0 4px 24px rgba(0,0,0,0.15)',
-                position: 'relative'
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center'
             }}>
-                <h1
+                <div
                     style={{
-                        fontFamily: 'Montserrat, sans-serif',
-                        color: '#fff',
-                        fontWeight: '900',
-                        fontSize: '3em',
-                        letterSpacing: '2px',
-                        textAlign: 'center',
-                        margin: 0,
-                        textShadow: '0 4px 16px #ff512f, 0 2px 8px #232526'
+                        display: 'inline-block',
+                        background: 'rgba(0,0,0,0.85)',
+                        borderRadius: '14px',
+                        padding: '18px 32px',
+                        margin: '0 auto',
+                        boxShadow: '0 2px 12px #00000044'
                     }}
                 >
-                    ⚠️ Emergency Essentials Hub ⚠️
-                </h1>
+                    <h1
+                        style={{
+                            fontFamily: 'Montserrat, sans-serif',
+                            color: '#fff',
+                            fontWeight: '900',
+                            fontSize: '3em',
+                            letterSpacing: '2px',
+                            textAlign: 'center',
+                            margin: 0,
+                            textShadow: '0 4px 16px #ff512f, 0 2px 8px #232526'
+                        }}
+                    >
+                        ⚠️ Emergency Essentials Hub ⚠️
+                    </h1>
+                </div>
                 <img
                     src={hackathonLogo}
                     alt="Hackathon Logo"
                     style={{
                         position: 'absolute',
-                        bottom: '5px',
+                        bottom: '20px',
                         left: '32px',
                         width: '90px',
                         height: 'auto',
