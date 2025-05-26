@@ -8,4 +8,4 @@ To run the website do the following:
  - In a new terminal run cd react-frontend and then npm run start
  - Go to the local host link provided
 
-* You will need to download some libraries.
+*You will need to download some libraries.
