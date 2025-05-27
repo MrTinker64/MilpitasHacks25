@@ -80,11 +80,10 @@ const Reminder = ({ items = [] }) => {
       }
   
       for (const item of items) {
-        if (item.expiration.includes('N/A')) {
+        const reminderDate = calculateReminderDate(item.expiration);
+        if (!reminderDate) {
           continue;
         }
-        
-        const reminderDate = calculateReminderDate(item.expiration);
         
         const event = {
           summary: `Restock: ${item.item_name}`,
@@ -155,7 +154,7 @@ const Reminder = ({ items = [] }) => {
       return new Date(today.setFullYear(today.getFullYear() + 5));
     }
     
-    return new Date(today.setMonth(today.getMonth() + 1));
+    return null;
   };
 
   return (
@@ -209,10 +208,11 @@ const Reminder = ({ items = [] }) => {
         <h3>Upcoming Reminders:</h3>
         <ul>
           {items.map((item, index) => {
-            if (item.expiration.includes('N/A')) {
+            const reminderDate = calculateReminderDate(item.expiration);
+            if (!reminderDate) {
               return null;
             }
-            const reminderDate = calculateReminderDate(item.expiration);
+
             return (
               <li key={index} style={styles.reminderItem}>
                 <strong>{item.item_name}:</strong> {reminderDate.toLocaleDateString()}
