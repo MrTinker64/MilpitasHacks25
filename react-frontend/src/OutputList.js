@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const ItemList = ({ items = [] }) => {
-  // Track checked state for each item
   const [checkedItems, setCheckedItems] = useState({});
+  const [hoveredCard, setHoveredCard] = useState(null); // Track hovered card
 
   const handleCheckboxChange = (itemName) => {
     setCheckedItems(prev => ({
@@ -22,8 +22,12 @@ const ItemList = ({ items = [] }) => {
                 ...styles.card,
                 ...(checkedItems[item.item_name]
                   ? styles.cardCompleted
-                  : styles.cardUrgent)
+                  : styles.cardUrgent),
+                ...(hoveredCard === index ? styles.cardHover : {})
               }}
+              onClick={() => handleCheckboxChange(item.item_name)}
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
               <div style={{
                 ...styles.cardHeader,
@@ -36,7 +40,6 @@ const ItemList = ({ items = [] }) => {
                   <input
                     type="checkbox"
                     checked={!!checkedItems[item.item_name]}
-                    onChange={() => handleCheckboxChange(item.item_name)}
                     style={styles.checkbox}
                   />
                   {item.item_name}
@@ -64,7 +67,7 @@ const ItemList = ({ items = [] }) => {
                 <div style={styles.detailSection}>
                   <span style={styles.label}>Amazon Link:</span>
                   <p style={styles.detail}>
-                    <a href={item.amazon_search_link} target="_blank" rel="noopener noreferrer">
+                    <a href={item.amazon_search_link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                       Click here to purchase
                     </a>
                   </p>
@@ -109,13 +112,20 @@ const styles = {
     position: 'relative',
     color: '#232526',
   },
+  cardHover: {
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+    transform: 'scale(1.02)',
+    cursor: 'pointer',
+  },
   cardCompleted: {
     opacity: 0.5,
     borderLeftColor: '#4CAF50',
+    transition: 'all 0.2s ease',
   },
   cardUrgent: {
     opacity: 1,
     borderLeftColor: '#ff512f',
+    transition: 'all 0.2s ease',
   },
   cardHeader: {
     display: 'flex',
