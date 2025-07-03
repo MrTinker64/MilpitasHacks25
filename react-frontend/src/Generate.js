@@ -30,6 +30,7 @@ const GenerateKit = () => {
       "amazon_link": "https://www.amazon.com/first-aid-kit/s?k=first+aid+kit&i=hpc"
     }
   ]);
+  const [items, setItems] = useState([[]]);
 
   useEffect(() => {
           if (navigator.geolocation) {
@@ -120,6 +121,12 @@ const GenerateKit = () => {
   if (!showKit) {
     return (
       <div style={{ textAlign: 'center', margin: '60px 0' }}>
+        {items.map((item, index) => (
+          <input type="text" key={index} placeholder={item} style={{ margin: '10px', padding: '8px', width: '300px' }} />
+        ))}
+        <button onClick={() => setItems([...items, ''])} style={{ margin: '10px', padding: '8px 16px', fontSize: '1em' }}>
+          Add Item
+        </button>
         <button
           onClick={handleGenerateClick}
           disabled={isLoading}
